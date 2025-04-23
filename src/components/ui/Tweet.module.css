@@ -1,0 +1,30 @@
+.tweet {
+    width :100%;
+    height : 5em;
+    border-top: 1px solid var(--dark-border-color);
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+.tweetLine1 {
+    padding-top: 5px;
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+    max-height :25px;
+}
+
+.hashtag{
+    cursor: pointer;
+    color: var(--hashtag-color);
+}  
+.tweetLine3{
+    display:flex;
+    justify-content: flex-start;
+    align-items: center; 
+    padding-bottom: 5px;
+}
+.avatar{
+    object-fit: cover;
+}

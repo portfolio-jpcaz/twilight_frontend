@@ -1,0 +1,62 @@
+.authModal {
+    width: 40%;
+    margin-top:2em;
+    border-radius: "8px";
+    background-color: var(--background-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1em 1em;
+    border-radius: 5px;
+  }
+  
+  .authModalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .authModal form {
+    width: 60%;
+    display : flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap:0.5rem;
+    align-items: center;
+  }
+  .authModal h2{
+      font-size: small;
+      color: var(--text-color);
+  }
+  .authModal input ,
+  .authModal input:focus,
+  .authModal input:hover,
+  .authModal input:active,
+  .authModal input:not(:focus)
+   {
+      background-color: var(--background-color)!important;
+      color: var(--text-primary-color)!important;
+      padding: 5px;
+      border:  1px solid var(--btn-dark-border)!important;
+      width: 80%;
+  }
+  .authModal input:-webkit-autofill,
+  .authModal input:-webkit-autofill:hover,
+  .authModal input:-webkit-autofill:focus,
+  .authModal input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px var(--background-color) inset !important;
+    -webkit-text-fill-color: var(--text-primary-color) !important;
+  }
+  .authModal button{
+    width:80%;
+    cursor: pointer;
+  }
+  .authModal h2 {
+    color:var(--text-primary-color);
+  }

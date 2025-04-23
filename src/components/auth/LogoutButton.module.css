@@ -1,0 +1,9 @@
+.logout {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.logout p {
+    margin: 4px 0px;
+}

@@ -1,0 +1,93 @@
+
+@font-face {
+  font-family: "Mont-Heavy";
+  src: url("/fonts/Mont-Trial-Heavy.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  /* 🎨 Colors */
+  --btn-primary-bg: #3690EC;
+  --btn-dark-bg : #151D27;
+  --dark-border-color:#495562;
+  --btn-primary-active-bg:#2D78C6;
+  --hashtag-color:#367BFF;
+  --btn-light-bg: #FEFEFE;
+
+  --background-color: #151D27;
+  --lightgrey-background:rgb(215, 212, 212);
+  --text-primary-color: #FEFEFE;
+  --text-secondary-color:#2280F0 ;
+  --text-dark-color: #000000;
+  --text-grey-color:#898C8F;
+  --login-background-image : url("/twitterbackground.webp");
+  --font-title: 'Mont-Heavy','Verdana', sans-serif;
+  --font-text : 'Verdana', sans-serif;
+  --font-size-small: 0.5em;
+  --font-size-large: 1em;
+  --font-size-medium: 0.8em;
+  --font-size-xlarge:3em;
+}
+.txt-small {
+  font-size: var(--font-size-small);
+  
+}
+.txt-medium {
+  font-size:  var(--font-size-medium);
+}
+.txt-large {
+  font-size: var(--font-size-large);
+  color:var(--text-color);
+}.txt-xlarge {
+  font-size: var(--font-size-xlarge);
+}
+.font-title{
+  font-family: var(--font-title);
+}
+.font-text{
+  font-family: var(--font-text);
+}
+.txt-primary-color {
+  color : var(--text-primary-color);
+}
+.txt-secondary-color{
+  color: var(--text-secondary-color);
+}
+.txt-greyed-color{
+  color: var(--text-grey-color);
+}
+.btn{
+  border-radius: 1em;
+  font-family: var(--font-text);
+  width:35%;
+  cursor: pointer;
+  border-style: none ;
+  font-size: var(--font-size-small);
+  font-weight: bold;
+  padding: 0.5em ;
+  height: 3em;
+}
+.btn-primary{
+  background-color: var(--btn-primary-bg);
+  color: var(--text-primary-color);
+}
+.btn-primary:active{
+  background-color: var(--btn-primary-active-bg);
+}
+.btn-dark{
+  background-color: var(--btn-dark-bg);
+  color: var(--text-secondary-color);
+  border:thin solid var(--dark-border-color) ;
+}
+.btn-light{
+  background-color: var(--btn-light-bg);
+  color: var(--text-dark-color);
+}
+.pointer {
+    cursor: pointer;
+}
+
+.txt-bold{
+  font-weight: bold;
+}
