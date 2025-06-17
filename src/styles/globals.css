@@ -1,4 +1,6 @@
-
+body{
+  margin:0;
+}
 @font-face {
   font-family: "Mont-Heavy";
   src: url("/fonts/Mont-Trial-Heavy.otf") format("opentype");
@@ -47,6 +49,7 @@
 }
 .font-text{
   font-family: var(--font-text);
+  color:var(--text-color);
 }
 .txt-primary-color {
   color : var(--text-primary-color);

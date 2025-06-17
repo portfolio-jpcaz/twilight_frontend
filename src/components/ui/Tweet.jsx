@@ -8,10 +8,10 @@ import { useState } from "react";
 // tweet component :
 // contains :
 export default function Tweet({tweet}) {
-  const { id, author, message, since, likesCounter, liked }=tweet;
+  const { id, author, message, since, nbLikes, liked }=tweet;
 
   const [isLiked, setLiked]= useState(liked);
-  const [nbLikes, setNbLikes] = useState(likesCounter);
+  const [likesCount, setLikesCount] = useState(Number(nbLikes));
   const handleHashtagClick = (hashtag)=>{
     console.log(`${hashtag} clicked`);
     // redirect to the Trends page
@@ -40,7 +40,7 @@ export default function Tweet({tweet}) {
     return;
   }
   const handleLike = ()=>{
-    setNbLikes(nbLikes + (isLiked? -1 : 1));
+    setLikesCount(likesCount + (isLiked? -1 : 1));
     setLiked(!isLiked); // this call changes the color of the heart icon
     
     // call the backend route to update the list of users that like the tweet
@@ -70,7 +70,7 @@ export default function Tweet({tweet}) {
           onClick ={handleLike}
           aria-label={(isLiked ? "liked":"Not liked")+ "by logged in User"} 
           />
-        <span className="font-text txt-primary-color txt-small">{nbLikes}</span>
+        <span className="font-text txt-primary-color txt-small">{likesCount}</span>
         <FontAwesomeIcon
         className="txt-primary-color txt-small"
         icon={faTrash}

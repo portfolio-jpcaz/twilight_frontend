@@ -1,0 +1,42 @@
+.pageLayout {
+    width : 60vw;
+    height: 30vh;
+    display :flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.pageLayout h1 {
+    width : 90%;
+    text-align:center;
+}
+.formLayout{
+    height: auto;
+    width : 60%;
+    border-radius: 1rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding:1rem;
+    gap: 0.8rem;
+    background-color:var(--text-grey-color);
+}
+.formGroup{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0rem;
+    gap: 1rem;
+    width:100%;
+}
+.formGroup label{
+    width: auto;
+}
+.formGroup input {
+    width : 70%;
+    height : 2rem;
+}
+.formGroup p{
+    margin:0;
+}

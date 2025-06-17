@@ -12,9 +12,9 @@ export const metadata = {
 export default function LoginLayout({ children }) {
     console.log(__filename);
     return (
-      <html lang="en">
+     
       
-        <body className={styles.loginLayout} suppressHydrationWarning>
+        <div className={styles.loginLayout} suppressHydrationWarning>
           <div className={styles.loginIllustration}>
             <Image className={styles.logoPicture}
               src= {LOGO_PATH}
@@ -25,7 +25,7 @@ export default function LoginLayout({ children }) {
             />
           </div>
           <main className={styles.loginRightSection}>{children}</main>
-        </body>
-      </html>
+        </div>
+   
     );
   }

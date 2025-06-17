@@ -1,0 +1,36 @@
+.pageLayout{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.formLayout {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  width: 60%;
+  border-radius: 1rem;
+  gap: 0.8rem;
+  justify-content: space-around;
+  align-items: center;
+  background-color:var(--text-grey-color);
+  border-radius: 1rem;
+  padding:1rem;
+}
+.formGroup{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    gap: 1rem;
+    width:100%;
+}
+.formGroup label{
+    width: auto;
+}
+.formGroup input {
+    width : 55%;
+    height : 1.5rem;
+}
+.formLayout button {
+    width: 50% !important;
+}

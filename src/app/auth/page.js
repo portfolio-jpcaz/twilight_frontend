@@ -6,29 +6,40 @@ import styles from "./page.module.css";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import MsgModal from "@/components/ui/MsgModal";
-import { signup } from "@/services/auth";
-
+import { signup , signin } from "@/services/auth";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "@/reducers/userSlice";
 export default function AuthPage() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignupOpen, setIsSignupOpen] = useState(false);
   const [msg, setMsg]=useState(null);
   const router = useRouter();
+  const dispatch=useDispatch();
   const handleLogin = async (data) => {
     
     console.log(`User login: ${data.username} - password: ${data.password}`);
-    // Logique d'authentification
-    router.replace("/");
-    return true;
+    const userData = await signin(data);
+    if (userData.result){
+      // successful login : save the user data into the user reducer
+      dispatch(setCredentials(userData))
+      // navigate to dashboard
+      router.push("/");
+    } else {
+      
+      setMsg(userData.message)
+    }
+    setIsLoginOpen(false);
+    return userData.result;
 
   };
   const handleSignUp = async (data) => {
-    console.log(`New User : ${data.username} - first name : ${data.firstname} - password: ${data.password}`);
-    // Logique d'authentification
+    //console.log(`New User : ${data.username} - first name : ${data.firstname} - password: ${data.password}`);
+    
     const res = await signup(data);
     setMsg(res.message);
     setIsSignupOpen(false);
 
-    return response.result;
+    return res.result;
   };
   return (
     <div className={styles.loginPageContent}>
@@ -51,10 +62,10 @@ export default function AuthPage() {
       title="Authentication"
       message={msg}
       />
-      <AuthModal
+      <AuthModal 
         isOpen={isLoginOpen}
         setIsOpen={setIsLoginOpen}
-        title="Connexion"
+        title="Log in"
         fields={[
           {
             name: "username",
@@ -69,6 +80,11 @@ export default function AuthPage() {
             required: true,
             autoComplete: "new-password",
           },
+          {
+            name:`/auth/forgot-password`,
+            type:"link",
+            placeholder:"Forgot password ?"
+          }
         ]}
         submitButtonText="Sign In"
         onSubmit={handleLogin}

@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import Modal from "react-modal";
 import { useState, useEffect } from "react";
 import styles from "./AuthModal.module.css";
@@ -50,18 +51,22 @@ export default function AuthModal({
       />
       <h2>{title}</h2>
       <form onSubmit={handleSubmit}>
-        {fields.map((field) => (
-          <input
-            key={field.name}
-            type={field.type}
-            name={field.name}
-            placeholder={field.placeholder}
-            value={formData[field.name]}
-            onChange={handleChange}
-            required={field.required}
-            autoComplete={field.autoComplete || "off"}
-          />
-        ))}
+        {fields.map((field, index) =>
+          field.type == "link" ? (
+            <Link key={index} href={field.name}>{field.placeholder}</Link>
+          ) : (
+            <input
+              key={index}
+              type={field.type}
+              name={field.name}
+              placeholder={field.placeholder}
+              value={formData[field.name]}
+              onChange={handleChange}
+              required={field.required}
+              autoComplete={field.autoComplete || "off"}
+            />
+          )
+        )}
         <button type="submit">{submitButtonText}</button>
       </form>
     </Modal>

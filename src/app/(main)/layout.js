@@ -1,4 +1,3 @@
-import "@/styles/globals.css";
 import styles from "@/styles/HomeLayout.module.css";
 import Link from "next/link";
 import Image from "next/image";
@@ -17,8 +16,8 @@ export default function HomeLayout({ children }) {
   console.log(__filename);
 
   return (
-    <html lang="en">
-      <body className={styles.dashboard} suppressHydrationWarning>
+ 
+      <div className={styles.dashboard} >
         <div className={styles.dashboardLeft}>
           <Link href="/home">
             <Image
@@ -36,7 +35,6 @@ export default function HomeLayout({ children }) {
           <h2 className="txt-primary-color font-text txt-large">Trends</h2>
           <Trends/>
         </div>
-      </body>
-    </html>
+      </div>
   );
 }

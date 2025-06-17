@@ -1,3 +1,4 @@
+'use client';
 import styles from "./LastTweets.module.css"
 import Tweet from "./Tweet";
 export default function LastTweets({tweets}){
