@@ -5,13 +5,19 @@ import styles from "./Tweet.module.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { deleteTweet } from "@/services/tweets";
+
 // tweet component :
 // contains :
-export default function Tweet({tweet}) {
+export default function Tweet({tweet, onDelete}) {
   const { id, author, message, since, nbLikes, liked }=tweet;
-
   const [isLiked, setLiked]= useState(liked);
   const [likesCount, setLikesCount] = useState(Number(nbLikes));
+  const loggedInUser = useSelector(state=>state.user.user.id);
+  const accessToken = useSelector(state=> state.user.accessToken);
+  console.log(`author.id = ${author.id} `);
+  const isAuthor = (author.id == loggedInUser);
   const handleHashtagClick = (hashtag)=>{
     console.log(`${hashtag} clicked`);
     // redirect to the Trends page
@@ -34,11 +40,15 @@ export default function Tweet({tweet}) {
       return htmlPart;
     });
   };
-  const handleDelete = ()=>{
-    // call backend route to delete the tweet by id
-    // call reducer function to update displayed tweets list
+  const handleDelete = async ()=>{
+    const res= await deleteTweet(accessToken,id );
+    if ( res.status == 200){
+      // succesful destruction - refresh the list of tweets
+      onDelete(id);
+    }
     return;
   }
+
   const handleLike = ()=>{
     setLikesCount(likesCount + (isLiked? -1 : 1));
     setLiked(!isLiked); // this call changes the color of the heart icon
@@ -75,7 +85,9 @@ export default function Tweet({tweet}) {
         className="txt-primary-color txt-small"
         icon={faTrash}
         aria-label="delete this tweet"
-        onClick={handleDelete} />
+        onClick={(isAuthor)? handleDelete:undefined}
+        style={!isAuthor ? { opacity: 0.4, cursor: "not-allowed" } : {cursor:"pointer"}}
+         />
       </div>
     </div>
   );

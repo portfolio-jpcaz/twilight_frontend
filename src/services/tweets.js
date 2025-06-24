@@ -1,8 +1,9 @@
 // calls to backend services related to tweets
+import { makeErroringExoticSearchParamsForUseCache } from "next/dist/server/request/search-params";
 import { secureFetch } from "./auth";
 import { NB_MAX_TWEETS } from "@/app/constants";
 // creation of a new tweet
-export async function newTweet(message, accessToken, dispatch) {
+export async function newTweet(message, accessToken, dispatch, router) {
   // call to the "/tweets/new" backend route
   const newTweetURL = `${process.env.NEXT_PUBLIC_BACKEND_URL}/tweets/new`;
   const data = {
@@ -12,14 +13,21 @@ export async function newTweet(message, accessToken, dispatch) {
   };
   
   // secured call with verification of access token
-  const res = await secureFetch(newTweetURL, accessToken,data,dispatch);
+  const res = await secureFetch(newTweetURL, accessToken,data,dispatch, router);
   return res;
 }
 // get the nbMaxTweets latest tweets data, if new tweets have been published since the tweet with
 // id : sinceTweet. if sinceTweet = 0 then the nbMaxTweets latest tweets are returned irrespective 
 // of when they have been published.
-export async function lastTweets(accessToken, dispatch, sinceTweet=0, nbMaxTweets=NB_MAX_TWEETS) {
+export async function lastTweets(accessToken, dispatch, router, sinceTweet=0, nbMaxTweets=NB_MAX_TWEETS) {
   const lastTweetsURL =`${process.env.NEXT_PUBLIC_BACKEND_URL}/tweets?since=${sinceTweet}&nbMaxTweets=${nbMaxTweets}`;
-  const res = await secureFetch(lastTweetsURL,accessToken,{},dispatch );
+  const res = await secureFetch(lastTweetsURL,accessToken,{},dispatch, router );
+  return res;
+}
+
+// delete the tweet with Id twwetID
+export async function deleteTweet(accessToken, tweetId){
+  const delTweetURL = `${process.env.NEXT_PUBLIC_BACKEND_URL}/tweets/${tweetId}`;
+  const res = await secureFetch(delTweetURL, accessToken,{method:'DELETE'} );
   return res;
 }

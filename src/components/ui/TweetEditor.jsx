@@ -5,6 +5,7 @@ import styles from "./TweetEditor.module.css"
 import { useSelector, useDispatch } from "react-redux";
 import MsgModal from "./MsgModal";
 import { newTweet } from "@/services/tweets";
+import { useRouter } from "next/navigation";
 
 // input box to enter a new tweet, contains a character counter 
 // and a Tweet button to validate.
@@ -16,6 +17,7 @@ export default function TweetEditor ({hashtag}) {
     const ctrlsVisible = (hashtag == undefined);
     const [error, setError]= useState(null);
     const dispatch= useDispatch();
+    const router = useRouter();
     const accessToken = useSelector((state)=> state.user.accessToken);
       
     const handleChange = (e) => {
@@ -25,7 +27,7 @@ export default function TweetEditor ({hashtag}) {
     }
     const handleClick = async ()=>{
         // create a new tweet with the entered message
-        const response = await newTweet(message,accessToken,dispatch);
+        const response = await newTweet(message,accessToken,dispatch,router);
         if (response.result){
             // success : reinit the tweet editor
             setMessage("");
