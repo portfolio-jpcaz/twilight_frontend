@@ -8,13 +8,13 @@ import { lastTweets } from "@/services/tweets";
 import { useDispatch, useSelector } from "react-redux";
 import { POLLING_FREQ_SECONDS } from "@/app/constants";
 import { useRouter } from "next/navigation";
+import { useSecureFetch } from "@/hooks/useSecureFetch";
 
 export default function LastTweets({ hastag }) {
   const [tweets, setTweets] = useState([]);
   const [error, setError] = useState(null);
   const accessToken = useSelector((state) => state.user.accessToken);
-  const dispatch = useDispatch();
-  const router = useRouter();
+  const secureFetch= useSecureFetch();
   // a reference to the tweets state that is kept up to date on each tweets state change
   const tweetsRef = useRef([]);
   // a reference to the intervalID of the setInterval(). In case of an error,
@@ -41,10 +41,9 @@ export default function LastTweets({ hastag }) {
       const lastTweetId = tweetsRef.current[0]?.id || 0;
       // pass the up-to-date value of the access token (vs accessToken : initial value at component loading)
       const res = await lastTweets(
+        {sinceTweet:lastTweetId},
         accessTokenRef.current,
-        dispatch,
-        router,
-        lastTweetId
+        secureFetch
       );
       if (!res.result) {
         setError(res.message); // display the error in a modal dialog
@@ -74,12 +73,12 @@ export default function LastTweets({ hastag }) {
   return (
     <div className={styles.tweets}>
       {tweets.map((tweet) => (
-        <Tweet key={tweet.id} tweet={tweet} onDelete={handleDeleteTweet} />
+        <Tweet key={tweet.id} tweet={tweet} onDelete={handleDeleteTweet} onError={setError} />
       ))}
       <MsgModal
         isOpen={error}
         setMsg={setError}
-        title="Get Latest Tweets"
+        title="Last Tweets"
         message={error}
       />
     </div>
