@@ -10,7 +10,8 @@ import { POLLING_FREQ_SECONDS } from "@/app/constants";
 import { useRouter } from "next/navigation";
 import { useSecureFetch } from "@/hooks/useSecureFetch";
 
-export default function LastTweets({ hastag }) {
+export default function LastTweets({ hashtag , reload}) {
+  console.log('LastTweets mounted with reload=', reload);
   const [tweets, setTweets] = useState([]);
   const [error, setError] = useState(null);
   const accessToken = useSelector((state) => state.user.accessToken);
@@ -24,22 +25,14 @@ export default function LastTweets({ hastag }) {
   // a reference to the access token of the logged in user: to get the
   // updated version in case of refresh
   const accessTokenRef = useRef(accessToken);
-  // Sync accessToken ref with the latest value
-  useEffect(() => {
-    accessTokenRef.current = accessToken;
-  }, [accessToken]);
-  useEffect(() => {
-    tweetsRef.current = tweets;
-  }, [tweets]);
-
-  // on component initialisation get the last tweets from the backend and then
-  // on a regular basis update this list (using setInterval)
-  useEffect(() => {
-    const fetchNewTweets = async () => {
+  // function that gets the list of the latest tweets from the backend
+  const fetchNewTweets = async () => {
+    
       // need the up-to-date "latest tweet Id" in order the change the tweets list"
       // only if new tweets have arrived, hence the use of tweetRef
       const lastTweetId = tweetsRef.current[0]?.id || 0;
       // pass the up-to-date value of the access token (vs accessToken : initial value at component loading)
+      
       const res = await lastTweets(
         {sinceTweet:lastTweetId},
         accessTokenRef.current,
@@ -57,6 +50,20 @@ export default function LastTweets({ hastag }) {
         setTweets(res.lastTweets);
       }
     };
+  // Sync accessToken ref with the latest value
+  useEffect(() => {
+    accessTokenRef.current = accessToken;
+  }, [accessToken]);
+  useEffect(() => {
+    tweetsRef.current = tweets;
+  }, [tweets]);
+
+ 
+ 
+  // on component initialisation get the last tweets from the backend and then
+  // on a regular basis update this list (using setInterval)
+  useEffect(() => {
+    
     // get the initial list of tweets
     fetchNewTweets();
     // poll for new tweets on a regular basis
@@ -67,6 +74,11 @@ export default function LastTweets({ hastag }) {
 
     return () => clearInterval(intervalRef.current);
   }, []);
+  // each time a new tweet is created, reload the list of tweets
+  useEffect(()=>{
+    console.log('useEffect [reload] fired, reload=', reload);
+    fetchNewTweets();}, [reload]);
+
   function handleDeleteTweet(id) {
     setTweets((tweets) => tweets.filter((t) => t.id != id));
   }

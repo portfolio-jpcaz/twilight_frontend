@@ -11,7 +11,7 @@ import { useSecureFetch } from "@/hooks/useSecureFetch";
 // and a Tweet button to validate.
 // if this component is used in a /hashtags page then there is only an
 // input box with a preset value : the passed hashtag
-export default function TweetEditor ({hashtag}) {
+export default function TweetEditor ({hashtag,onNewTweet}) {
     const [counter, setCounter]=useState(0);
     const [message, setMessage]=useState(!hashtag?"":hashtag);
     const ctrlsVisible = (hashtag == undefined);
@@ -31,6 +31,7 @@ export default function TweetEditor ({hashtag}) {
             // success : reinit the tweet editor
             setMessage("");
             setCounter(0);
+            onNewTweet(); // send signal to update the list of last tweets
         } else {
             setError(response.message);
         }
