@@ -2,8 +2,20 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    position: fixed;
+    bottom: 0.5em;    /* distance depuis le bas de l'écran */
+    left: 0.5em;      /* distance depuis la gauche de l'écran */
 }
 
 .logout p {
     margin: 4px 0px;
+}
+
+.tooltip{
+    position: fixed;
+    background-color:var(--lightgrey-background);
+    color:var(--text-dark-color);
+    z-index: 1000;
+    padding: 8px 12px;  
+    border-radius: 6px; 
 }

@@ -49,7 +49,6 @@ body{
 }
 .font-text{
   font-family: var(--font-text);
-  color:var(--text-color);
 }
 .txt-primary-color {
   color : var(--text-primary-color);
