@@ -124,7 +124,7 @@ export async function secureFetch(
     // update the headers of the request to include the access token
     const headers = new Headers(init.headers || {});
     if (accessToken) {
-      console.log("access token : " + accessToken);
+      //console.log("access token : " + accessToken);
       headers.set("Authorization", `Bearer ${accessToken}`);
     }
     // call the route
@@ -150,7 +150,7 @@ export async function secureFetch(
     if (refreshData.result && refreshData.accessToken) {
       // save the new acces token into the User reducer
       if (dispatch) {
-        console.log("saving new access token : " + refreshData.accessToken);
+        //console.log("saving new access token : " + refreshData.accessToken);
         dispatch(setAccessToken(refreshData.accessToken));
       }
       // update the headers with the new token and try to call the route again

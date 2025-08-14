@@ -17,8 +17,10 @@ export async function newTweet({message}, accessToken, secureFetch) {
 // get the nbMaxTweets latest tweets data, if new tweets have been published since the tweet with
 // id : sinceTweet. if sinceTweet = 0 then the nbMaxTweets latest tweets are returned irrespective 
 // of when they have been published.
-export async function lastTweets( { sinceTweet=0, nbMaxTweets=NB_MAX_TWEETS }, accessToken,secureFetch) {
-  const lastTweetsURL =`${process.env.NEXT_PUBLIC_BACKEND_URL}/tweets?since=${sinceTweet}&nbMaxTweets=${nbMaxTweets}`;
+export async function lastTweets( { sinceTweet=0, hashtag, nbMaxTweets=NB_MAX_TWEETS }, accessToken,secureFetch) {
+  let lastTweetsURL =`${process.env.NEXT_PUBLIC_BACKEND_URL}/tweets?since=${sinceTweet}&nbMaxTweets=${nbMaxTweets}`;
+  // add hashtag filter to the URL: remove the # prefix
+  if (hashtag) lastTweetsURL += `&hashtag=${encodeURIComponent(hashtag.replace(/^#/, ''))}`;
   const res = await secureFetch(lastTweetsURL,accessToken,{} );
   return res;
 }

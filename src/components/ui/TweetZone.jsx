@@ -12,7 +12,7 @@ export default function TweetZone({ title, hashtag }) {
   return (
     <div>
       <h2 className="txt-primary-color font-text txt-large">{title}</h2>
-      <TweetEditor hashtag={hashtag} onNewTweet={()=>setReloadFlag(!reloadFlag)}/>
+      <TweetEditor hashtag={hashtag} onNewTweet={()=>setReloadFlag(fl=>!fl)}/>
       <LastTweets hashtag={hashtag} reload={reloadFlag}/>
     </div>
   );

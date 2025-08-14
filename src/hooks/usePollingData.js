@@ -73,7 +73,12 @@ export function usePollingData(
     intervalRef.current = setInterval(fetchData, interval);
     return () => clearInterval(intervalRef.current);
     // 
-  }, [autoStart, interval]); // You may want to depend on other args
+  }, [autoStart, interval, fetchFunction]); 
+// IMPORTANT: fetchFunction is included in the dependency array.
+// This ensures the polling interval always uses the latest fetchFunction,
+// which may capture updated props or variables (like filters, tokens, etc.).
+// If fetchFunction is omitted from dependencies, the polling could call
+// a stale function and not react to changes in its closure (e.g. updated hashtag).
 
   // Manual refetch (can be used after actions, or for a refresh button)
   const refetch = fetchData;

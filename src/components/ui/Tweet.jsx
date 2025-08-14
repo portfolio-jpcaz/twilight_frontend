@@ -17,7 +17,7 @@ export default function Tweet({tweet, onDelete, onError}) {
   const secureFetch =useSecureFetch();
   const loggedInUser = useSelector(state=>state.user.user.id);
   const accessToken = useSelector(state=> state.user.accessToken);
-  console.log(`author.id = ${author.id} `);
+  //console.log(`author.id = ${author.id} `);
   const isAuthor = (author.id == loggedInUser);
   const handleHashtagClick = (hashtag)=>{
     console.log(`${hashtag} clicked`);
@@ -89,7 +89,7 @@ export default function Tweet({tweet, onDelete, onError}) {
         <span className="font-text txt-small txt-primary-color text-bold">
           {author.firstName}
         </span>
-        <span className="font-text txt-small txt-greyed-color">@{author.user} - {since}</span>
+        <span className="font-text txt-small txt-greyed-color">@{author.username} - {since}</span>
       </div>
       <p className="font-text txt-small txt-primary-color">{renderMessage(message)}</p>
       <div className={styles.tweetLine3}>

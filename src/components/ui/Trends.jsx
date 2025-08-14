@@ -5,13 +5,18 @@ import { usePollingData } from "@/hooks/usePollingData";
 import { useSecureFetch } from "@/hooks/useSecureFetch";
 import MsgModal  from "./MsgModal";
 import { POLLING_FREQ_SECONDS } from "@/app/constants";
+import { useRouter } from "next/navigation";
+import { useCallback} from "react";
+// components that shows the most trendy hashtags in the recent tweets
 export default function Trends() {
 
   const secureFetch = useSecureFetch();
-  
-  const fetchHashtags = async (accessToken) => {
+  const router= useRouter();
+  const fetchHashtags = useCallback ( async (accessToken) => {
+    console.log("fetchHashtags called", Date.now());
     return await lastHashtags(accessToken, secureFetch);
-  };
+  },[secureFetch]);
+  
   // Use the custom polling hook to get the latest tweets on a regular basis
   const {
     data: trends,
@@ -21,8 +26,14 @@ export default function Trends() {
     refetch,
   } = usePollingData(fetchHashtags, { interval: POLLING_FREQ_SECONDS * 1000 , autoStart:true});
   
+  // hashtag clicked : filter the tweets with this hashtag 
+  // switch to the /hashtags/[tag] URL where tag is the clicked hashtag without the # prefix
   const handleClick = (event) => {
     console.log(`hashtag : ${event.target.textContent} clicked`);
+    const hashtag = event.target.textContent.slice(1);// slice(1) to remove the # prefix
+    const newURL= `/hashtags/${hashtag}`
+    router.push(newURL);
+
   };
   return (
     <div>

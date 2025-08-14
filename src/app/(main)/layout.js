@@ -19,7 +19,7 @@ export default function HomeLayout({ children }) {
  
       <div className={styles.dashboard} >
         <div className={styles.dashboardLeft}>
-          <Link href="/home">
+          <Link href="/">
             <Image
               className={styles.logo}
               src={LOGO_PATH}

@@ -1,0 +1,6 @@
+.hashtag{
+    cursor:pointer
+}
+.hashtag:hover {
+    color: var(--hashtag-color);
+}
