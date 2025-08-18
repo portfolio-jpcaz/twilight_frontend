@@ -1,7 +1,7 @@
 import styles from "@/styles/HomeLayout.module.css";
 import Link from "next/link";
 import Image from "next/image";
-import LogoutButton from "@/components/auth/logoutButton";
+import LogoutButton from "@/components/auth/LogoutButton";
 import { LOGO_PATH } from "../constants";
 import Trends from "@/components/ui/Trends"
 export const metadata = {
