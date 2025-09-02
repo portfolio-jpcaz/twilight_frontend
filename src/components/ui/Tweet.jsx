@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { deleteTweet, toggleLike } from "@/services/tweets";
 import { useSecureFetch } from "@/hooks/useSecureFetch";
+import { useRouter } from "next/navigation";
 // tweet component :
 // contains :
 export default function Tweet({tweet, onDelete, onError}) {
@@ -17,11 +18,15 @@ export default function Tweet({tweet, onDelete, onError}) {
   const secureFetch =useSecureFetch();
   const loggedInUser = useSelector(state=>state.user.user.id);
   const accessToken = useSelector(state=> state.user.accessToken);
+  const router = useRouter();
   //console.log(`author.id = ${author.id} `);
   const isAuthor = (author.id == loggedInUser);
   const handleHashtagClick = (hashtag)=>{
     console.log(`${hashtag} clicked`);
-    // redirect to the Trends page
+    // redirect to the hashtag page
+    const trend = hashtag.slice(1);// slice(1) to remove the # prefix
+    const newURL= `/hashtags/${trend}`
+    router.push(newURL);
   }
   const renderMessage = (text) => {
     return text.split(/(\#\w+)/g).map((part, index) => {
