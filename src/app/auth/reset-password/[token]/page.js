@@ -1,15 +1,16 @@
 "use client";
-import { useState, use } from "react";
+import { useState } from "react";
 import styles from "./page.module.css";
 import MsgModal from "@/components/ui/MsgModal";
-import {useRouter} from "next/navigation";
+import {useRouter, useSearchParams } from "next/navigation";
 import { newPassword } from "@/services/auth";
 
 export default function ResetPasswordPage(paramsPromise) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [msg, setMsg] = useState(null);
-  const { token } = use(paramsPromise.params);
+  const search = useSearchParams();
+  const token = search.get("token");   // ← récupère ?token=
   const router=useRouter();
   const handleSubmit = async (e) => {
     e.preventDefault();
