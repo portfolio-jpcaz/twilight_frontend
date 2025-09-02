@@ -1,5 +1,4 @@
 "use client";
-import { useSearchParams } from "next/navigation";
 import { useState, use } from "react";
 import styles from "./page.module.css";
 import MsgModal from "@/components/ui/MsgModal";
