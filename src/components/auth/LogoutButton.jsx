@@ -15,6 +15,8 @@ export default function LogoutButton() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const loggedInUser = useSelector((state) => state.user.user);
+  const firstname = loggedInUser? loggedInUser.firstname : "";
+  const username=loggedInUser? loggedInUser.username : "";
   const handleMouseEnter = (e) => {
     setShowTooltip(true);
     setMousePosition({ x: e.clientX, y: e.clientY });
@@ -57,10 +59,10 @@ export default function LogoutButton() {
 
         <div>
           <p className="font-text txt-small txt-primary-color txt-bold">
-            {loggedInUser.firstname}
+            {firstname}
           </p>
           <p className="font-text txt-small txt-greyed-color">
-            @{loggedInUser.username}
+            @{username}
           </p>
         </div>
       </div>
