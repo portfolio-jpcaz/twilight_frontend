@@ -1,38 +1,101 @@
-# twilight_frontend
-Light twitter application frontend developed with React/Next.js
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌙 Twilight – Frontend (React / Next.js)
 
-## Getting Started
+Twilight is a web application inspired by Twitter, built to showcase advanced **fullstack development skills**.  
+The frontend is developed with **React / Next.js**, providing a structured UI with authentication, dynamic routes, and real-time trends visualization.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Try it out
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Twilight is a **web app** – no installation needed.  
+👉 Access it directly here: [Vercel Link](https://twilight-frontend-five.vercel.app)
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ✨ Main Features
 
-## Learn More
+- **Secure Authentication**
 
-To learn more about Next.js, take a look at the following resources:
+  - Signup with **email confirmation**
+  - Login with **JWT** and **refresh tokens** handled via **HTTP-only cookies**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Tweet Management**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+  - Create, delete, like/unlike tweets
+  - Automatic hashtag extraction when creating tweets
 
-## Deploy on Vercel
+- **Trends (Hashtags)**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  - Display of most used and recent hashtags
+  - Trends column updating regularly with polling
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Hashtag Search**
+
+  - Explore all tweets linked to a specific hashtag
+
+- **User Interface**
+  - Three-column layout (navigation / content / trends)
+  - Desktop design faithfully reproduced from a **custom mockup**
+  - 📱 A **mobile version with React Native** is planned
+
+---
+
+## 🛠️ Tech Stack & Skills Demonstrated
+
+### 🔹 Frontend
+
+- **Next.js / React**
+
+  - Static and **dynamic routing** (by hashtag)
+  - Global state management with **Redux**
+  - Logic factorization using **custom hooks**
+  - Reusable and modular **React components** for a clean architecture
+
+- **UI & Interaction**
+
+  - Mockup-to-code reproduction with **CSS Modules**
+  - **Polling** with `setInterval` to simulate real-time trends
+  - Automatic token injection in API calls
+
+- **Authentication (Client-side)**
+  - Secure JWT storage & refresh token handling
+  - Session management with Redux + cookies
+
+### 🔹 Backend Integration
+
+- Works with a **Node.js / Express** API (separate repo)
+- **PostgreSQL** database hosted on **Supabase**
+- Token verification middleware securing protected routes
+
+---
+
+## 🧑‍💻 How to use the app
+
+1. **Sign up** with your email and confirm it.
+2. Once logged in, you see the **list of tweets** in the central column.
+3. You can:
+   - **Like / Unlike** any tweet.
+   - **Create a new tweet** (hashtags are automatically detected).
+   - See the **most used hashtags** from recent tweets in the right column.
+4. **Explore hashtags**:
+   - Click a hashtag in the trends list or inside a tweet to view all related tweets.
+   - On a hashtag page, type a different hashtag in the search input to view its tweets.
+5. **Navigation**:
+   - Click the **logo** (top-left) to return to the full tweet feed.
+   - Use the **logout link** (bottom-left) to disconnect.
+6. **Real-time updates**: tweets appear dynamically as users post them.
+
+---
+
+## 💡 Future Improvements
+
+- 📱 Mobile application in **React Native**
+- 🔐 **Google Sign-In (OAuth2)** support
+
+---
+
+## 👩‍💻 Author
+
+Developed by **Jean-Pierre Cazeaux**  
+📌 GitHub: [github account]( https://github.com/portfolio-jpcaz )  
+🌐 Deployed on Vercel:[link]( https://twilight-frontend-five.vercel.app/ )
